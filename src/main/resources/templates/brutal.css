@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+/* Neotribal "Fuego de cobre": obsidiana, hueso, bermellón y oro viejo.
+   Ubicación en Quarkus: src/main/resources/META-INF/resources/brutal.css
+   Se carga DESPUÉS de Bootstrap y sobreescribe sus componentes. */
+
+:root{
+  --bg:#140f0c; --ink:#f2e9d8; --hot:#e2401c; --accent2:#c99a2e; --on-hot:#140f0c;
+  --display:"Unbounded","Arial Black",sans-serif;
+  --text:"Work Sans","Helvetica Neue",Arial,sans-serif;
+  --bs-body-font-family:var(--text);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:light){
+  :root{ --bg:#f2e9d8; --ink:#140f0c; --hot:#b8300f; --accent2:#9c7416; --on-hot:#faf5ea; color-scheme:light}
+}
+
+*,*::before,*::after{ transition:none!important}
+.btn,.card,.form-control,.form-select,.badge,.alert,.nav-link,.list-group,.list-group-item,.navbar-toggler{ border-radius:0!important}
+:focus-visible{ outline:4px solid var(--hot)!important;outline-offset:3px;box-shadow:none!important}
+
+body{ background:var(--bg)!important;color:var(--ink);font-family:var(--text);font-weight:500;line-height:1.35}
+main.container{ padding-right:1.5rem;padding-bottom:3rem}
+a:not(.btn):not(.nav-link):not(.navbar-brand){ color:var(--hot);font-weight:800;text-decoration-thickness:3px;text-underline-offset:3px}
+.text-muted{ color:var(--ink)!important;opacity:.75}
+.text-danger{ color:var(--hot)!important}
+.text-success{ color:var(--ink)!important}
+hr{ border-top:6px solid var(--ink);opacity:1}
+
+/* Tipografía */
+h1,h2,h3,.h3,.h5{ font-family:var(--display);font-weight:400;text-transform:uppercase}
+main h1{ color:var(--hot);font-size:clamp(3rem,9vw,6.5rem)!important;line-height:.9;letter-spacing:-.01em;overflow-wrap:anywhere}
+main h2{ color:var(--ink);font-size:2rem!important;line-height:1}
+.display-5{ font-family:var(--display);font-weight:400!important;font-size:clamp(8rem,38vw,20rem)!important;line-height:.8;color:var(--hot)}
+.lead{ font-weight:800;font-size:1.6rem}
+@media (prefers-reduced-motion:no-preference){
+  main h1{ animation:slam .5s cubic-bezier(.2,.9,.2,1) both}
+  @keyframes slam{ from{ transform:translateY(40%);opacity:0}to{ transform:none;opacity:1}}
+}
+
+/* Barra de navegación y pie */
+.navbar{ background:var(--bg);border-bottom:6px solid var(--ink);padding:.6rem 0}
+.navbar-brand{ font-family:var(--display);font-weight:400!important;font-size:1.9rem;text-transform:uppercase;color:var(--hot)!important}
+.navbar .nav-link{ color:var(--ink)!important;font-weight:800;text-transform:uppercase;padding:.5rem 1rem;margin-left:.4rem}
+.navbar .nav-link:hover{ background:var(--ink);color:var(--bg)!important}
+.navbar .nav-link.active{ background:var(--hot);color:var(--on-hot)!important}
+.navbar-toggler{ border:4px solid var(--ink);color:var(--ink);font-family:var(--display);font-size:1.3rem;text-transform:uppercase;padding:.25rem .8rem}
+@media (max-width:991.98px){
+  .navbar-collapse{ border-top:3px solid var(--ink);margin-top:.6rem;padding-top:.6rem}
+  .navbar .nav-link{ margin:0 0 .3rem}
+}
+footer{ background:var(--bg);color:var(--ink);border-top:6px solid var(--ink);font-weight:700}
+
+/* Alertas */
+.alert{ border:6px solid var(--ink);background:var(--bg);color:var(--ink);font-weight:800;box-shadow:8px 8px 0 var(--hot);margin-right:8px}
+.alert-success{ background:var(--ink);color:var(--bg)}
+.alert-danger,.alert-warning{ background:var(--hot);color:var(--on-hot);border-color:var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.alert-link{ color:inherit!important;text-decoration:underline;text-decoration-thickness:4px}
+
+/* Tarjetas */
+.card,.card.shadow-sm{ --bs-card-bg:var(--bg);--bs-card-color:var(--ink);--bs-card-border-width:6px;
+  border:6px solid var(--ink);background:var(--bg);color:var(--ink);box-shadow:12px 12px 0 var(--hot)!important}
+.card:has(>.card-header.bg-primary){ border-color:var(--hot);box-shadow:12px 12px 0 var(--ink)!important}
+.card-header{ background:var(--ink);color:var(--bg);border:0;padding:.5rem 1rem;
+  font-family:var(--display);font-size:1.8rem;line-height:1.1;text-transform:uppercase}
+.card-header.bg-primary{ background:var(--hot)!important;color:var(--on-hot)!important}
+.card-header.bg-success{ background:var(--ink)!important;color:var(--bg)!important}
+.card-footer{ background:transparent;border-top:6px solid var(--ink);padding:1rem}
+.card-footer .btn+.btn{ margin-left:.5rem}
+
+/* Tarjetas de resumen: cada color = un estado */
+.card[class*="text-bg-"]{ box-shadow:8px 8px 0 var(--hot)!important}
+.card.text-bg-success{ background:var(--ink)!important;color:var(--bg)!important}
+.card.text-bg-primary{ background:var(--hot)!important;color:var(--on-hot)!important;border-color:var(--hot);box-shadow:8px 8px 0 var(--ink)!important}
+.card.text-bg-warning{ background:var(--accent2)!important;color:var(--on-hot)!important;border-color:var(--accent2);box-shadow:8px 8px 0 var(--ink)!important}
+.card.text-bg-secondary{ background:var(--bg)!important;color:var(--ink)!important;border-style:dashed}
+.card .fs-3{ font-family:var(--display);font-weight:400!important;font-size:3.2rem!important;line-height:.95}
+.card[class*="text-bg-"] .small{ font-weight:800;text-transform:uppercase}
+
+/* Listas dentro de tarjetas */
+.list-group{ --bs-list-group-bg:transparent;--bs-list-group-color:var(--ink)}
+.list-group-item{ background:transparent;color:inherit;border:0;border-bottom:3px solid var(--ink);padding:.8rem 1rem;font-weight:700}
+.list-group-item:last-child{ border-bottom:0}
+
+/* Formularios */
+.form-label{ font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:.9rem}
+.form-text{ color:var(--ink);font-weight:700;opacity:.8}
+.form-control,.form-select{ background-color:transparent;color:var(--ink);border:4px solid var(--ink);font-weight:700;padding:.7rem .9rem}
+.form-control:focus,.form-select:focus{ background-color:transparent;color:var(--ink);border-color:var(--hot)}
+.form-control::placeholder{ color:var(--ink);opacity:.6}
+.form-select{ appearance:none;-webkit-appearance:none;padding-right:2.6rem;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);
+  background-position:calc(100% - 22px) 50%,calc(100% - 14px) 50%;background-size:8px 8px;background-repeat:no-repeat}
+option{ background:var(--bg);color:var(--ink)}
+
+/* Botones */
+.btn{ border:4px solid var(--ink);font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1.2;
+  letter-spacing:.02em;text-transform:uppercase;padding:.5rem 1.1rem}
+.btn-sm{ font-size:1rem;padding:.3rem .7rem;border-width:3px}
+.btn.btn-primary{ background:var(--hot);border-color:var(--hot);color:var(--on-hot)}
+.btn.btn-success{ background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.btn-primary:hover,.btn.btn-primary:active{ background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.btn-success:hover,.btn.btn-success:active{ background:var(--hot);border-color:var(--hot);color:var(--on-hot)}
+.btn.btn-outline-primary,.btn.btn-outline-secondary{ background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn.btn-outline-danger{ background:transparent;border-color:var(--hot);color:var(--hot)}
+.btn.btn-outline-primary:hover,.btn.btn-outline-secondary:hover,.btn.btn-outline-danger:hover,
+.btn.btn-outline-primary:active,.btn.btn-outline-secondary:active,.btn.btn-outline-danger:active{ background:var(--hot);border-color:var(--hot);color:var(--on-hot)}
+.btn.btn-primary:focus-visible{ outline-color:var(--ink)!important}
+
+/* Píldoras de filtro */
+.nav-pills{ gap:.5rem}
+.nav-pills .nav-link{ border:4px solid var(--ink);color:var(--ink);font-weight:800;text-transform:uppercase;padding:.45rem 1rem}
+.nav-pills .nav-link:hover,.nav-pills .nav-link.active{ background:var(--hot);border-color:var(--hot);color:var(--on-hot)}
+
+/* Tablas */
+.table{ --bs-table-bg:transparent;--bs-table-color:var(--ink);--bs-table-hover-bg:transparent;--bs-table-hover-color:var(--ink);--bs-table-border-color:var(--ink)}
+.table thead th{ background:var(--ink);color:var(--bg);font-family:var(--display);font-weight:400;font-size:1.15rem;
+  letter-spacing:.03em;text-transform:uppercase;padding:.7rem 1rem;border-bottom:0;box-shadow:none}
+.table tbody td{ background:transparent;color:var(--ink);font-weight:700;padding:.8rem 1rem;border-bottom:3px solid var(--ink);box-shadow:none}
+.table tbody tr:last-child td{ border-bottom:0}
+.table tbody tr:hover{ outline:4px solid var(--hot);outline-offset:-4px}
+.table .small{ font-weight:500}
+
+/* Etiquetas de estado */
+.badge{ border:3px solid var(--ink);font-family:var(--display);font-weight:400;font-size:.95rem;letter-spacing:.03em;text-transform:uppercase;padding:.3rem .6rem;vertical-align:middle}
+.badge.text-bg-success{ background:var(--ink)!important;color:var(--bg)!important}
+.badge.text-bg-primary{ background:var(--hot)!important;color:var(--on-hot)!important;border-color:var(--hot)}
+.badge.text-bg-warning{ background:var(--accent2)!important;color:var(--on-hot)!important;border-color:var(--accent2)}
+.badge.text-bg-danger{ background:var(--bg)!important;color:var(--hot)!important;border-color:var(--hot)}
+.badge.text-bg-secondary{ background:transparent!important;color:var(--ink)!important;border-style:dashed}
+
+/* Motivos neotribales: cenefa en zigzag, facetas cortadas y textura tejida */
+.navbar::after{ content:"";display:block;height:12px;
+  background-image:linear-gradient(135deg,var(--hot) 25%,transparent 25.5%),linear-gradient(225deg,var(--hot) 25%,transparent 25.5%);
+  background-size:18px 12px;background-position:0 0;background-repeat:repeat-x}
+footer::before{ content:"";display:block;height:12px;margin-bottom:14px;
+  background-image:linear-gradient(135deg,var(--ink) 25%,transparent 25.5%),linear-gradient(225deg,var(--ink) 25%,transparent 25.5%);
+  background-size:18px 12px;background-position:0 0;background-repeat:repeat-x}
+main h1::before,main h2::before{ content:"";display:inline-block;width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:15px solid var(--hot);margin-right:10px;vertical-align:middle}
+.navbar-brand::before{ content:"";display:inline-block;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid currentColor;margin-right:8px;vertical-align:middle}
+.btn{ clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.btn-sm{ clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px)}
+.badge{ clip-path:polygon(4px 0,100% 0,100% calc(100% - 4px),calc(100% - 4px) 100%,0 100%,0 4px)}
+.card-header{ clip-path:polygon(12px 0,100% 0,100% 100%,0 100%,0 12px)}
+.table thead th{ background-image:repeating-linear-gradient(135deg,rgba(0,0,0,.12) 0 3px,transparent 3px 11px)}

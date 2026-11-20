@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inscripciones - Gimnasio Hexagonal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * \{ box-sizing: border-box; \}
+        :root \{
+            --bg:#140f0c;
+            --ink:#f2e9d8;
+            --hot:#e2401c;
+            --accent2:#c99a2e;
+            --on-hot:#140f0c;
+            --display:"Unbounded","Arial Black",sans-serif;
+            --text:"Work Sans","Helvetica Neue",Arial,sans-serif;
+        \}
+        @media (prefers-color-scheme: dark)\{:root:not([data-theme="light"])\{--bg:#140f0c;--ink:#f2e9d8;--hot:#e2401c;--accent2:#c99a2e;--on-hot:#140f0c\}\}
+        @media (prefers-color-scheme: light)\{:root:not([data-theme="dark"])\{--bg:#f2e9d8;--ink:#140f0c;--hot:#b8300f;--accent2:#9c7416;--on-hot:#faf5ea\}\}
+        :root[data-theme="dark"] \{ --bg:#140f0c; --ink:#f2e9d8; --hot:#e2401c; --accent2:#c99a2e; --on-hot:#140f0c; \}
+        :root[data-theme="light"] \{ --bg:#f2e9d8; --ink:#140f0c; --hot:#b8300f; --accent2:#9c7416; --on-hot:#faf5ea; \}
+        :focus-visible \{ outline: 3px solid var(--hot); outline-offset: 2px; \}
+        body \{ margin: 0; background: var(--bg); color: var(--ink); font-family: var(--text); font-weight: 500; font-size: 16px; line-height: 1.5; \}
+        header \{ background: var(--bg); border-bottom: 6px solid var(--ink); \}
+        .nav-wrap, main, footer \{ width: min(1120px, calc(100% - 32px)); margin: auto; \}
+        .nav-wrap \{ min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 12px 0; \}
+        .brand \{ color: var(--hot); font-family: var(--display); font-weight: 400; font-size: 1.5rem; text-transform: uppercase; letter-spacing: -.01em; text-decoration: none; \}
+        nav \{ display: flex; flex-wrap: wrap; gap: 8px; \}
+        nav a \{ color: var(--ink); padding: 7px 10px; text-decoration: none; border: 3px solid transparent; font-weight: 800; text-transform: uppercase; font-size: .82rem; letter-spacing: .02em; \}
+        nav a:hover, nav a.current \{ color: var(--bg); background: var(--ink); border-color: var(--ink); \}
+        main \{ min-height: calc(100vh - 130px); padding: 32px 0; \}
+        footer \{ padding: 18px 0; color: var(--ink); opacity: .7; text-align: center; font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; border-top: 6px solid var(--ink); \}
+        h1, h2, p \{ margin-top: 0; \}
+        h1 \{ font-family: var(--display); font-weight: 400; text-transform: uppercase; color: var(--hot); font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -.01em; \}
+        .heading, .actions, .tabs, .table-heading \{ display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; \}
+        .heading \{ margin-bottom: 20px; border-bottom: 6px solid var(--ink); padding-bottom: 16px; \}
+        .heading h1 \{ margin: 0; \}
+        .actions \{ justify-content: flex-start; \}
+        .button \{ display: inline-block; border: 3px solid var(--hot); border-radius: 0; padding: 8px 14px; background: var(--hot); color: var(--on-hot); text-decoration: none; font: inherit; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; cursor: pointer; \}
+        .button:hover \{ background: var(--ink); border-color: var(--ink); color: var(--bg); \}
+        .button.secondary \{ color: var(--ink); background: transparent; border-color: var(--ink); \}
+        .button.secondary:hover \{ background: var(--ink); color: var(--bg); \}
+        .button.small \{ padding: 5px 9px; font-size: .8rem; \}
+        .flash \{ margin-bottom: 18px; padding: 12px 15px; border: 4px solid; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; \}
+        .flash.success \{ color: var(--ink); background: transparent; border-color: var(--ink); \}
+        .flash.success::before \{ content: "✓ "; \}
+        .flash.error \{ color: var(--on-hot); background: var(--hot); border-color: var(--hot); \}
+        .flash.error::before \{ content: "✕ "; \}
+        .stats \{ display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 24px; \}
+        .stat, .panel \{ background: var(--bg); border: 4px solid var(--ink); border-radius: 0; box-shadow: 8px 8px 0 var(--hot); \}
+        .stat \{ padding: 16px; \}
+        .stat.active \{ border-color: var(--ink); \}
+        .stat.pending \{ border-color: var(--accent2); box-shadow: 8px 8px 0 var(--ink); \}
+        .stat.expired \{ border-color: var(--ink); opacity: .55; \}
+        .stat p \{ margin: 0; color: var(--ink); opacity: .75; text-transform: uppercase; font-size: .8rem; font-weight: 800; letter-spacing: .03em; \}
+        .stat strong \{ display: block; font-family: var(--display); font-weight: 400; font-size: 2.2rem; \}
+        .tabs \{ justify-content: flex-start; margin-bottom: 14px; \}
+        .tabs a \{ padding: 7px 12px; border: 3px solid var(--ink); border-radius: 0; color: var(--ink); text-decoration: none; background: transparent; font-weight: 800; text-transform: uppercase; font-size: .82rem; \}
+        .tabs a.current \{ color: var(--bg); background: var(--ink); \}
+        .table-wrap \{ overflow-x: auto; \}
+        table \{ width: 100%; border-collapse: collapse; background: var(--bg); \}
+        th, td \{ padding: 11px 12px; border-bottom: 3px solid var(--ink); text-align: left; vertical-align: middle; \}
+        th \{ background: var(--ink); color: var(--bg); font-size: .8rem; text-transform: uppercase; font-weight: 800; letter-spacing: .03em; \}
+        .right \{ text-align: right; \}
+        .muted, .subtle \{ color: var(--ink); opacity: .65; \}
+        .subtle \{ font-size: .9rem; \}
+        .status \{ display: inline-block; border: 3px solid var(--ink); border-radius: 0; padding: 2px 9px; background: transparent; color: var(--ink); font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; \}
+        .status.success \{ color: var(--ink); border-color: var(--ink); \}
+        .status.warning \{ color: var(--accent2); border-color: var(--accent2); \}
+        .status.danger \{ color: var(--on-hot); background: var(--hot); border-color: var(--hot); \}
+        @media (max-width: 650px) \{ .nav-wrap \{ align-items: flex-start; \} nav \{ width: 100%; \} main \{ padding-top: 22px; \} \}
+        /* Motivos neotribales: cenefa en zigzag, facetas cortadas y textura tejida */
+        header::after \{
+            content: ""; display: block; height: 12px;
+            background-image: linear-gradient(135deg, var(--ink) 25%, transparent 25.5%), linear-gradient(225deg, var(--ink) 25%, transparent 25.5%);
+            background-size: 18px 12px; background-position: 0 0; background-repeat: repeat-x;
+        \}
+        footer::before \{
+            content: ""; display: block; height: 12px; margin-bottom: 14px;
+            background-image: linear-gradient(135deg, var(--ink) 25%, transparent 25.5%), linear-gradient(225deg, var(--ink) 25%, transparent 25.5%);
+            background-size: 18px 12px; background-position: 0 0; background-repeat: repeat-x;
+        \}
+        h1::before \{ content: ""; display: inline-block; width: 0; height: 0; border-top: 11px solid transparent; border-bottom: 11px solid transparent; border-left: 16px solid var(--hot); margin-right: 12px; vertical-align: middle; \}
+        .brand::before \{ content: ""; display: inline-block; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 12px solid currentColor; margin-right: 8px; vertical-align: middle; \}
+        .button \{ clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); \}
+        .status \{ clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px); \}
+        th \{ background-image: repeating-linear-gradient(135deg, rgba(0,0,0,.12) 0 3px, transparent 3px 11px); \}
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav-wrap">
+        <a class="brand" href="/">Gimnasio Hexagonal</a>
+        <nav aria-label="Navegación principal">
+            <a class="current" href="/">Inscripciones</a>
+            <a href="/enrollments/new">Nueva inscripción</a>
+            <a href="/plans">Planes</a>
+            <a href="/reports">Reportes</a>
+            <a href="/q/swagger-ui">Swagger</a>
+        </nav>
+    </div>
+</header>
+<main>
+    {#if success}<div class="flash success" role="status">{success}</div>{/if}
+    {#if error}<div class="flash error" role="alert">{error}</div>{/if}
+
+    <div class="heading">
+        <h1>Inscripciones</h1>
+        <div class="actions">
+            <a class="button secondary" href="/reports/enrollments.pdf">Descargar listado (PDF)</a>
+            <a class="button" href="/enrollments/new">Nueva inscripción</a>
+        </div>
+    </div>
+
+    <section class="stats" aria-label="Resumen">
+        <div class="stat active"><p>Activas</p><strong>{activeCount}</strong></div>
+        <div class="stat pending"><p>Pendientes de pago</p><strong>{pendingCount}</strong></div>
+        <div class="stat expired"><p>Vencidas</p><strong>{expiredCount}</strong></div>
+        <div class="stat"><p>Saldo por cobrar</p><strong>{receivable}</strong></div>
+    </section>
+
+    <nav class="tabs" aria-label="Filtrar inscripciones">
+        <a class="{#if !filter}current{/if}" href="/">Todas ({total})</a>
+        <a class="{#if filter == 'ACTIVE'}current{/if}" href="/?status=ACTIVE">Activas</a>
+        <a class="{#if filter == 'PENDING'}current{/if}" href="/?status=PENDING">Pendientes</a>
+        <a class="{#if filter == 'EXPIRED'}current{/if}" href="/?status=EXPIRED">Vencidas</a>
+        <a class="{#if filter == 'CANCELLED'}current{/if}" href="/?status=CANCELLED">Canceladas ({cancelledCount})</a>
+    </nav>
+
+    {#if enrollments.isEmpty()}
+    <p class="muted">No hay inscripciones para mostrar.</p>
+    {#else}
+    <section class="panel table-wrap">
+        <table>
+            <thead>
+                <tr><th>N.º</th><th>Socio</th><th>Plan</th><th>Vigencia</th><th>Estado</th><th class="right">Pagado</th><th class="right">Saldo</th><th></th></tr>
+            </thead>
+            <tbody>
+                {#for e in enrollments}
+                <tr>
+                    <td>#{e.id}</td>
+                    <td>{e.memberName}<br><span class="subtle">CC {e.memberDocument}</span></td>
+                    <td>{e.planName}</td>
+                    <td class="subtle">{e.startDate} al {e.endDate}</td>
+                    <td><span class="status {e.statusClass}">{e.statusLabel}</span></td>
+                    <td class="right">{e.paid}</td>
+                    <td class="right">{e.balance}</td>
+                    <td class="right"><a class="button secondary small" href="/enrollments/{e.id}">Ver / pagar</a></td>
+                </tr>
+                {/for}
+            </tbody>
+        </table>
+    </section>
+    {/if}
+</main>
+<footer>Desarrollo Orientado a Servicios - Quarkus con Qute, JPA/MySQL</footer>
+</body>
+</html>

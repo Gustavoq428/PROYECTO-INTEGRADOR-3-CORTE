@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detalle de inscripción - Gimnasio Hexagonal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * \{ box-sizing: border-box; \}
+        :root \{
+            --bg: #140f0c;
+            --ink: #f2e9d8;
+            --hot: #e2401c;
+            --accent2: #c99a2e;
+            --on-hot: #140f0c;
+            --display: "Unbounded","Arial Black",sans-serif;
+            --text: "Work Sans","Helvetica Neue",Arial,sans-serif;
+        \}
+        @media (prefers-color-scheme: light) \{
+            :root \{ --bg: #f2e9d8; --ink: #140f0c; --hot: #b8300f; --accent2: #9c7416; --on-hot: #faf5ea; \}
+        \}
+        html \{ scroll-padding-top: env(safe-area-inset-top, 0px); \}
+        body \{ margin: 0; background: var(--bg); color: var(--ink); font-family: var(--text); font-weight: 500; font-size: 16px; line-height: 1.45; \}
+        a, button, input, select \{ font: inherit; color: inherit; \}
+        :focus-visible \{ outline: 4px solid var(--hot); outline-offset: 2px; \}
+        header \{ background: var(--ink); border-bottom: 6px solid var(--hot); \}
+        .nav-wrap, main, footer \{ width: min(1120px, calc(100% - 32px)); margin: auto; \}
+        .nav-wrap \{ min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 14px 0; \}
+        .brand \{ color: var(--bg); font-family: var(--display); font-weight: 400; font-size: 1.6rem; text-transform: uppercase; letter-spacing: -.01em; text-decoration: none; \}
+        nav \{ display: flex; flex-wrap: wrap; gap: 8px; \}
+        nav a \{ color: var(--bg); padding: 8px 14px; text-decoration: none; font-weight: 700; border: 3px solid transparent; \}
+        nav a:hover \{ border-color: var(--bg); \}
+        nav a.current \{ background: var(--hot); color: var(--on-hot); border-color: var(--hot); \}
+        main \{ min-height: calc(100vh - 140px); padding: 36px 0; \}
+        footer \{ padding: 20px 0; border-top: 6px solid var(--ink); text-align: center; font-weight: 700; text-transform: uppercase; font-size: .78rem; letter-spacing: .04em; \}
+        h1, h2, p \{ margin-top: 0; \}
+        h1 \{ font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: -.01em; font-size: clamp(2.1rem, 4.4vw, 3.2rem); color: var(--hot); margin: 0 0 4px; \}
+        h2 \{ font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .01em; font-size: 1.3rem; \}
+        .heading, .actions, .table-heading \{ display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; \}
+        .heading \{ margin-bottom: 24px; border-bottom: 6px solid var(--ink); padding-bottom: 16px; \}
+        .heading h1 \{ margin: 0; \}
+        .actions \{ justify-content: flex-start; \}
+        .button \{ display: inline-block; border: 3px solid var(--hot); border-radius: 0; padding: 9px 16px; background: var(--hot); color: var(--on-hot); text-decoration: none; font: inherit; font-weight: 800; text-transform: uppercase; font-size: .82rem; letter-spacing: .02em; cursor: pointer; \}
+        .button:hover \{ background: var(--bg); color: var(--hot); \}
+        .button.secondary \{ background: transparent; border-color: var(--ink); color: var(--ink); \}
+        .button.secondary:hover \{ background: var(--ink); color: var(--bg); \}
+        .button.success \{ background: var(--ink); border-color: var(--ink); color: var(--bg); \}
+        .button.success:hover \{ background: var(--bg); color: var(--ink); \}
+        .button.danger \{ background: transparent; border-color: var(--hot); color: var(--hot); \}
+        .button.danger:hover \{ background: var(--hot); color: var(--on-hot); \}
+        .button.small \{ padding: 5px 10px; font-size: .74rem; \}
+        .button.full \{ width: 100%; text-align: center; \}
+        .flash \{ margin-bottom: 20px; padding: 14px 18px; border: 3px solid; font-weight: 700; \}
+        .flash.success \{ color: var(--bg); background: var(--ink); border-color: var(--ink); \}
+        .flash.error \{ color: var(--on-hot); background: var(--hot); border-color: var(--hot); \}
+        .panel \{ background: var(--bg); border: 4px solid var(--ink); box-shadow: 8px 8px 0 var(--hot); \}
+        .panel-title \{ margin: 0; padding: 14px 18px; background: var(--ink); color: var(--bg); font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .01em; font-size: 1.15rem; \}
+        .panel-title.green \{ background: var(--hot); color: var(--on-hot); \}
+        .panel-body \{ padding: 20px; \}
+        .panel-actions \{ display: flex; justify-content: flex-end; gap: 9px; padding: 14px 18px; border-top: 3px solid var(--ink); \}
+        .table-wrap \{ overflow-x: auto; \}
+        table \{ width: 100%; border-collapse: collapse; background: var(--bg); \}
+        th, td \{ padding: 12px 14px; border-bottom: 3px solid var(--ink); text-align: left; vertical-align: middle; \}
+        th \{ background: var(--ink); color: var(--bg); font-size: .76rem; text-transform: uppercase; letter-spacing: .03em; font-weight: 800; \}
+        .right \{ text-align: right; \}
+        .muted, .subtle \{ color: var(--ink); opacity: .7; \}
+        .subtle \{ font-size: .85rem; \}
+        label \{ display: block; margin: 0 0 6px; font-weight: 800; text-transform: uppercase; font-size: .76rem; letter-spacing: .03em; \}
+        input, select \{ width: 100%; padding: 10px 12px; border: 3px solid var(--ink); border-radius: 0; background: var(--bg); color: var(--ink); font: inherit; \}
+        input:focus, select:focus \{ outline: 4px solid var(--hot); outline-offset: 0; border-color: var(--hot); \}
+        input::placeholder \{ color: var(--ink); opacity: .6; \}
+        .field \{ margin-bottom: 16px; min-width: 0; \}
+        @media (max-width: 650px) \{ .nav-wrap \{ align-items: flex-start; \} nav \{ width: 100%; \} main \{ padding-top: 22px; \} \}
+        .columns \{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; \}
+        .details \{ margin: 0; \}
+        .details div \{ display: flex; justify-content: space-between; gap: 12px; padding: 12px 18px; border-bottom: 3px solid var(--ink); \}
+        .details div:last-child \{ border-bottom: 0; \}
+        .details dt \{ text-transform: uppercase; font-size: .76rem; font-weight: 800; letter-spacing: .03em; \}
+        .details dd \{ margin: 0; text-align: right; font-weight: 700; \}
+        .balance \{ color: var(--hot); font-family: var(--display); font-weight: 400; font-size: 1.2rem; \}
+        .balance.paid \{ color: var(--ink); \}
+        .help \{ color: var(--ink); opacity: .7; font-size: .85rem; margin-top: 6px; \}
+        .status \{ display: inline-block; padding: 3px 10px; border: 3px solid var(--ink); font-size: .74rem; font-weight: 800; text-transform: uppercase; color: var(--ink); background: transparent; opacity: .75; vertical-align: middle; \}
+        .status.success \{ background: var(--ink); color: var(--bg); opacity: 1; \}
+        .status.warning \{ border-color: var(--accent2); color: var(--accent2); opacity: 1; \}
+        .status.danger \{ background: var(--hot); border-color: var(--hot); color: var(--on-hot); opacity: 1; \}
+        .payment-heading \{ margin: 30px 0 14px; \}
+        @media (max-width: 700px) \{ .columns \{ grid-template-columns: 1fr; \} .nav-wrap \{ align-items: flex-start; \} nav \{ width: 100%; \} main \{ padding-top: 22px; \} \}
+        /* Motivos neotribales: cenefa en zigzag, facetas cortadas y textura tejida */
+        header::after \{
+            content: ""; display: block; height: 12px;
+            background-image: linear-gradient(135deg, var(--hot) 25%, transparent 25.5%), linear-gradient(225deg, var(--hot) 25%, transparent 25.5%);
+            background-size: 18px 12px; background-position: 0 0; background-repeat: repeat-x;
+        \}
+        footer::before \{
+            content: ""; display: block; height: 12px; margin-bottom: 14px;
+            background-image: linear-gradient(135deg, var(--ink) 25%, transparent 25.5%), linear-gradient(225deg, var(--ink) 25%, transparent 25.5%);
+            background-size: 18px 12px; background-position: 0 0; background-repeat: repeat-x;
+        \}
+        h1::before \{ content: ""; display: inline-block; width: 0; height: 0; border-top: 11px solid transparent; border-bottom: 11px solid transparent; border-left: 16px solid var(--hot); margin-right: 12px; vertical-align: middle; \}
+        .panel-title::before, .rules-title::before, .payment-heading::before, .table-heading h2::before \{ content: ""; display: inline-block; width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 9px solid currentColor; margin-right: 9px; vertical-align: middle; \}
+        .brand::before \{ content: ""; display: inline-block; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 12px solid currentColor; margin-right: 8px; vertical-align: middle; \}
+        .button \{ clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); \}
+        .status \{ clip-path: polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px); \}
+        .panel-title, .rules-title \{ clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); \}
+        th \{ background-image: repeating-linear-gradient(135deg, rgba(0,0,0,.12) 0 3px, transparent 3px 11px); \}
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav-wrap">
+        <a class="brand" href="/">Gimnasio Hexagonal</a>
+        <nav aria-label="Navegación principal">
+            <a class="current" href="/">Inscripciones</a>
+            <a href="/enrollments/new">Nueva inscripción</a>
+            <a href="/plans">Planes</a>
+            <a href="/reports">Reportes</a>
+            <a href="/q/swagger-ui">Swagger</a>
+        </nav>
+    </div>
+</header>
+<main>
+    {#if success}<div class="flash success" role="status">{success}</div>{/if}
+    {#if error}<div class="flash error" role="alert">{error}</div>{/if}
+    <div class="heading">
+        <h1>Inscripción #{e.id} <span class="status {e.statusClass}">{e.statusLabel}</span></h1>
+        <a class="button secondary" href="/">Volver al listado</a>
+    </div>
+
+    <div class="columns">
+        <section class="panel">
+            <h2 class="panel-title">Socio y plan</h2>
+            <dl class="details">
+                <div><dt>Socio</dt><dd><strong>{e.memberName}</strong></dd></div>
+                <div><dt>Documento</dt><dd>{e.memberDocument}</dd></div>
+                <div><dt>Teléfono</dt><dd>{e.memberPhone}</dd></div>
+                <div><dt>Plan</dt><dd>{e.planName} ({e.planPrice})</dd></div>
+                <div><dt>Vigencia</dt><dd>{e.startDate} al {e.endDate}</dd></div>
+                <div><dt>Pagado</dt><dd>{e.paid}</dd></div>
+                <div><dt>Saldo pendiente</dt><dd><strong class="balance {#if !e.hasBalance}paid{/if}">{e.balance}</strong></dd></div>
+            </dl>
+            {#if e.canCancel}
+            <div class="panel-actions">
+                <form method="post" action="/enrollments/{e.id}/cancel" onsubmit="return confirm('¿Seguro que quieres cancelar esta inscripción?')">
+                    <button class="button danger" type="submit">Cancelar inscripción</button>
+                </form>
+            </div>
+            {/if}
+        </section>
+
+        <section class="panel">
+            <h2 class="panel-title green">Registrar pago</h2>
+            <div class="panel-body">
+                {#if e.canPay}
+                <form method="post" action="/enrollments/{e.id}/payments">
+                    <div class="field">
+                        <label for="amount">Valor a pagar (COP)</label>
+                        <input type="number" id="amount" name="amount" min="1" step="1" required>
+                        <div class="help">Saldo pendiente: {e.balance}</div>
+                    </div>
+                    <div class="field">
+                        <label for="method">Medio de pago</label>
+                        <select id="method" name="method" required>
+                            {#for m in methods}
+                            <option value="{m.value}">{m.label}</option>
+                            {/for}
+                        </select>
+                    </div>
+                    <button class="button success full" type="submit">Registrar pago</button>
+                </form>
+                {#else}
+                <p class="muted">
+                    {#if e.canCancel}
+                    Esta inscripción ya está pagada por completo.
+                    {#else}
+                    Esta inscripción está {e.statusLabel}: no admite más pagos.
+                    {/if}
+                </p>
+                {/if}
+            </div>
+        </section>
+    </div>
+
+    <h2 class="payment-heading">Pagos realizados</h2>
+    {#if payments.isEmpty()}
+    <p class="muted">Todavía no hay pagos registrados.</p>
+    {#else}
+    <section class="panel table-wrap">
+        <table>
+            <thead><tr><th>Pago</th><th>Fecha</th><th>Medio</th><th class="right">Valor</th><th></th></tr></thead>
+            <tbody>
+                {#for p in payments}
+                <tr>
+                    <td>#{p.id}</td><td>{p.date}</td><td>{p.method}</td><td class="right">{p.amount}</td>
+                    <td class="right"><a class="button secondary" href="/reports/receipt/{p.id}.pdf">Comprobante (PDF)</a></td>
+                </tr>
+                {/for}
+            </tbody>
+        </table>
+    </section>
+    {/if}
+</main>
+<footer>Desarrollo Orientado a Servicios - Quarkus con Qute, JPA/MySQL</footer>
+</body>
+</html>

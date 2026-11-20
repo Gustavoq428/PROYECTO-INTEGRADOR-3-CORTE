@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>No encontrado - Gimnasio Hexagonal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * \{ box-sizing: border-box; \}
+        :root \{
+            --bg:#140f0c;
+            --ink:#f2e9d8;
+            --hot:#e2401c;
+            --accent2:#c99a2e;
+            --on-hot:#140f0c;
+            --display:"Unbounded","Arial Black",sans-serif;
+            --text:"Work Sans","Helvetica Neue",Arial,sans-serif;
+        \}
+        @media (prefers-color-scheme: dark)\{:root:not([data-theme="light"])\{--bg:#140f0c;--ink:#f2e9d8;--hot:#e2401c;--accent2:#c99a2e;--on-hot:#140f0c\}\}
+        @media (prefers-color-scheme: light)\{:root:not([data-theme="dark"])\{--bg:#f2e9d8;--ink:#140f0c;--hot:#b8300f;--accent2:#9c7416;--on-hot:#faf5ea\}\}
+        :root[data-theme="dark"] \{ --bg:#140f0c; --ink:#f2e9d8; --hot:#e2401c; --accent2:#c99a2e; --on-hot:#140f0c; \}
+        :root[data-theme="light"] \{ --bg:#f2e9d8; --ink:#140f0c; --hot:#b8300f; --accent2:#9c7416; --on-hot:#faf5ea; \}
+        :focus-visible \{ outline: 3px solid var(--hot); outline-offset: 2px; \}
+        body \{ margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); color: var(--ink); font-family: var(--text); font-weight: 500; font-size: 16px; line-height: 1.5; \}
+        main \{ width: min(600px, calc(100% - 32px)); padding: 48px 24px; text-align: center; background: var(--bg); border: 6px solid var(--ink); border-radius: 0; box-shadow: 14px 14px 0 var(--hot); \}
+        h1 \{ margin: 0; font-family: var(--display); font-weight: 400; color: var(--hot); text-transform: uppercase; font-size: clamp(4rem, 18vw, 7rem); line-height: .9; \}
+        p \{ color: var(--ink); opacity: .8; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; \}
+        a \{ display: inline-block; padding: 9px 14px; border: 3px solid var(--hot); border-radius: 0; background: var(--hot); color: var(--on-hot); text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; \}
+        a:hover \{ background: var(--ink); border-color: var(--ink); color: var(--bg); \}
+        /* Motivos neotribales */
+        h1::before \{ content: ""; display: inline-block; width: 0; height: 0; border-top: 11px solid transparent; border-bottom: 11px solid transparent; border-left: 16px solid var(--hot); margin-right: 12px; vertical-align: middle; \}
+        a \{ clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px); \}
+    </style>
+</head>
+<body>
+<main>
+    <h1>404</h1>
+    <p>{message}</p>
+    <a href="/">Volver al inicio</a>
+</main>
+</body>
+</html>
